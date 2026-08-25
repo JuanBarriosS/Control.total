@@ -20,12 +20,12 @@ El sistema es multi-tenant, event-driven y desacoplado. La API síncrona solo re
                                             │ • offboarding   │
                                             └─────────────────┘
                                                       │
-                    ┌─────────────────┬───────────────┼───────────────┬─────────────────┐
-                    ▼                 ▼               ▼               ▼                 ▼
-            ┌─────────────┐   ┌─────────────┐ ┌─────────────┐ ┌─────────────┐   ┌─────────────┐
-            │ PostgreSQL  │   │   Kafka     │ │   Vault     │ │  ClickHouse │   │   MinIO     │
-            │  +Timescale │   │  (Eventos)  │ │  (Secrets)  │ │  (Auditoría)│   │   (S3)      │
-            └─────────────┘   └─────────────┘ └─────────────┘ └─────────────┘   └─────────────┘
+                    ┌─────────────────┬───────────────┼───────────────┐
+                    ▼                 ▼               ▼               ▼                 
+            ┌─────────────┐   ┌─────────────┐ ┌────────────   ┌─────────────┐
+            │ PostgreSQL  │   │   Kafka     │ │   Vault     │ │   MinIO     │
+            │  +Timescale │   │  (Eventos)  │ │  (Secrets)  │ │   (S3)      │
+            └─────────────┘   └─────────────┘ └─────────────┘ └─────────────┘   
 ```
 
 ---
@@ -39,10 +39,6 @@ Punto único de entrada. Maneja rate limiting por tenant, validación de JWT, te
 ### API REST (FastAPI)
 
 Expone endpoints para CRUD de suscripciones, usuarios, reportes y configuración de organizaciones. Usa Pydantic para validación estricta de schemas. Es stateless; cualquier instancia puede atender cualquier request.
-
-### API GraphQL (Strawberry)
-
-Expone queries complejas para el dashboard. El frontend solicita exactamente los campos que necesita, evitando over-fetching. Resuelve relaciones anidadas (suscripción → empleados → departamento → gasto histórico) en una sola request.
 
 ---
 
