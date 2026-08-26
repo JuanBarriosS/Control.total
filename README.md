@@ -1,4 +1,4 @@
-Control Total — Documentación Técnica de Arquitectura
+#Control Total — Documentación Técnica de Arquitectura
 
 ## 1. Arquitectura General
 
